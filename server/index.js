@@ -29,16 +29,15 @@ io.on("connection",(socket)=>{
             return callback(error)
         } 
             
-        socket.emit('message',{user:user,text:`${user.name},welcome to the chatroom ${user.room}`})
+        // socket.emit('message',{user:user,text:`${user.name},welcome to the chatroom ${user.room}`})
         socket.broadcast.to(user.room).emit("message",{user:"admin",text:`${user.name}, joined the chat`});
         socket.join(user.room)
         callback()
     });
     socket.on("sendMessage",(message,callback)=>{
-        console.log(message)
         const user = getUser(socket.id);
 
-        io.to(user.room).emit("message",{userInfo:user,text:message});
+        socket.broadcast.to(user.room).emit("message",{userInfo:user,text:message});
         callback();
     })
 

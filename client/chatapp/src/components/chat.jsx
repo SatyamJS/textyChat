@@ -29,10 +29,14 @@ function Chat(props, location) {
     }, [ENDPOINT, location.search]);
 
 
-    useEffect(() => {
+   
+     useEffect(() => {
         socket.on("message", (message) => {
             console.log(message)
             setMessages([...messages, message]);
+            let chatHeadImage =document.getElementsByClassName("chatHeader")[0].children[0]
+            chatHeadImage.src=message.userInfo.avatar;
+            let senderName= document.getElementsByClassName("username")[0].value=`${message.userInfo.name}`
             const chatDiv = document.getElementsByClassName("chatBody")[0]
             const element = document.createElement("div")
             element.className = "left"
@@ -69,8 +73,7 @@ function Chat(props, location) {
 
         })
     }, [messages])
-    // const chatHeaderImage=document.getElementsByClassName("chatHeader").firstElementChild
-    // console.log(chatHeaderImage)
+
 
 
 
@@ -91,12 +94,12 @@ function Chat(props, location) {
     }
     const handleMessage = (event) => {
         setMessage(event.target.value)
-        console.log(message)
     }
     const sendMessage = (event) => {
         event.preventDefault()
         if (message) {
             socket.emit("sendMessage", message, () => setMessage(""))
+            
             let chatDiv = document.getElementsByClassName("chatBody")[0]
             const element = document.createElement("div")
             element.className = "right"
@@ -144,16 +147,7 @@ function Chat(props, location) {
                 </div>
 
                 <div className="chatBody" onChange={scrollToBottom}>
-                    {/* <div className="left">
-                        <span style={{ fontWeight: "bold" }}>{}</span>
-                        <img className="recieverAvatar" src={`${}`} alt="" />
-                        I am left msg
-                        <span className="leftSpanTime" >{chatTime} </span>
-                    </div> */}
-                    {/* <div className="right">
-                        <img className="recieverAvatar" src={`${props.data.avatar}`} alt="" />
-                        I am right mesg <span style={{ fontSize: "12px", margin: "10px", alignSelf: "flex-end" }}>{chatTime} </span>
-                    </div> */}
+                   
                 </div>
 
                 <div className="chatFooter">
