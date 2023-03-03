@@ -27,14 +27,17 @@ function Home(props) {
 
         })
     }
-    const createRoom=()=>{
-        let arr=[1,2,3,4,5,6,7,8,9,0,"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
-        let str=""
-        for (let i=0;i<=6;i++){
-           str+= arr[Math.floor(Math.random()*arr.length)]
+    const createRoom = () => {
+        let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+        let str = ""
+        for (let i = 0; i <= 6; i++) {
+            str += arr[Math.floor(Math.random() * arr.length)]
         }
-        const p=document.getElementsByClassName("roomP")[0]
-        p.innerHTML=`${str}`
+        const p = document.getElementsByClassName("roomP")[0]
+        p.innerHTML = `${str}`
+        setInput((prev)=>{
+            return {...prev,roomId:str}
+        })
 
     }
     return (
@@ -43,45 +46,50 @@ function Home(props) {
                 <img className="logoImage" src="logo.png" alt="Texty" />
                 <button className="modeBtn" onClick={changeBG}>Change Background</button>
             </div>
+            <div className="roomDiv">
+                <button className="roomBtn" onClick={createRoom}>+ Create Room</button>
+                <p>Share this room Id with your friends:&nbsp;&nbsp;&nbsp;
+                <span className="roomP"></span></p>
+            </div>
             <div className="avatarDiv">
                 <h4>Choose your avatar</h4>
                 <div className="avatars">
                     {/* using radio button with overlapped image to select one out of many avatars */}
                     <div onClick={getAvatar}>
                         <input type="radio" name="avatar" />
-                        <img src="1.png" alt="1.png"  />
+                        <img src="1.png" alt="1.png" />
                     </div>
-                    <div  onClick={getAvatar} >
+                    <div onClick={getAvatar} >
                         <input type="radio" name="avatar" />
-                        <img src="2.png" alt="2.png"/>
-                    </div>
-                    <div onClick={getAvatar}>
-                        <input type="radio" name="avatar" />
-                        <img src="3.png" alt="3.png"  />
+                        <img src="2.png" alt="2.png" />
                     </div>
                     <div onClick={getAvatar}>
                         <input type="radio" name="avatar" />
-                        <img src="4.png" alt="4.png"  />
+                        <img src="3.png" alt="3.png" />
                     </div>
                     <div onClick={getAvatar}>
                         <input type="radio" name="avatar" />
-                        <img src="5.png" alt="5.png"  />
+                        <img src="4.png" alt="4.png" />
                     </div>
                     <div onClick={getAvatar}>
                         <input type="radio" name="avatar" />
-                        <img src="6.png" alt="6.png"  />
+                        <img src="5.png" alt="5.png" />
                     </div>
                     <div onClick={getAvatar}>
                         <input type="radio" name="avatar" />
-                        <img src="7.png" alt="7.png"  />
+                        <img src="6.png" alt="6.png" />
                     </div>
                     <div onClick={getAvatar}>
                         <input type="radio" name="avatar" />
-                        <img src="8.png" alt="8.png"  />
+                        <img src="7.png" alt="7.png" />
                     </div>
                     <div onClick={getAvatar}>
                         <input type="radio" name="avatar" />
-                        <img src="9.png" alt="9.png"  />
+                        <img src="8.png" alt="8.png" />
+                    </div>
+                    <div onClick={getAvatar}>
+                        <input type="radio" name="avatar" />
+                        <img src="9.png" alt="9.png" />
                     </div>
                     <div onClick={getAvatar} >
                         <input type="radio" name="avatar" />
@@ -90,23 +98,19 @@ function Home(props) {
                     </div>
                 </div>
             </div>
-            <div className="roomDiv">
-                <button className="roomBtn" onClick={createRoom}>+ Create Room</button>
-                <p>Share this room Id with your friends:</p>
-                <p className="roomP"></p>
-            </div>
+
             <div className="inputBox">
                 <input type="text" name="name" placeholder="Username" value={input.name || ""} onChange={handleChange} />
                 <input type="text" name="roomId" placeholder="Room Id" value={input.roomId || ""} onChange={handleChange} />
-                {(input.roomId && input.name && input.avatar)?
-                <Link to="/chat"> <button className="buttonHome" onClick={(e)=>props.handleSubmit(e,input)}>Enter</button></Link>
-                :
-                <>
-                <Link to="/"> <button className="buttonHome" onClick={(e)=>props.handleSubmit(e,input)}>Enter</button></Link>
-                <span style={{color:"white"}}>Enter Room ID to join Room</span>
-                </>
+                {(input.roomId && input.name && input.avatar) ?
+                    <Link to="/chat"> <button className="buttonHome" onClick={(e) => props.handleSubmit(e, input)}>Enter</button></Link>
+                    :
+                    <>
+                        <Link to="/"> <button className="buttonHome" onClick={(e) => props.handleSubmit(e, input)}>Enter</button></Link>
+                        <span style={{ color: "white" }}>Enter Room ID to join Room</span>
+                    </>
 
-                }         
+                }
             </div>
             <div className="footer">Made with &#10084;&#65039; by Satyam 2023 </div>
         </>

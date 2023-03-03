@@ -139,16 +139,40 @@ body {
   position: relative;
   bottom: 0px;
   background: linear-gradient(to right, #ff512f, #dd2476);
-
+  
 }
 
 .buttonHome:hover {
   cursor: pointer;
   bottom: 5px;
   opacity: 0.9;
-
+  
 }
-
+.roomDiv{
+  color:white;
+  max-width:400px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin:10px auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.roomBtn{
+  padding: 10px;
+  color: white;
+  background-color: #fc6767;
+  top: 50px;
+  right: 30px;
+  border: 2px solid transparent;
+  transition: all 0.5s;
+  border-radius: 5px;
+  max-width: 200px;
+  margin:10px auto;
+}
+.roomBtn:hover{
+  border:2px solid white;
+  background: linear-gradient(to right, #ff512f, #dd2476);
+}
 
 /* chat component styling------------------------> */
 .chatDiv {
