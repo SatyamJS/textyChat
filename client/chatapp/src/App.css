@@ -176,7 +176,12 @@ body {
 }
 
 .username {
-  margin: 20px;
+  font-weight: bold;
+  color:tomato;
+}
+.timeSpan{
+  font-size: 13px;
+  color:yellow;
 }
 
 .online {
@@ -213,15 +218,31 @@ body {
 
 .left {
   display: flex;
+  flex-direction: column;
   max-width: 250px;
-  padding: 5px;
-  align-items: center;
+  padding: 5px 10px;
   margin: 10px;
   background-color: rgba(0, 0, 0, 0.4);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 
+}
+.userMsgHeader{
+  display: flex;
+  align-self: flex-start;
+  /* justify-content: center; */
+  align-items: center;
+}
+.left img{
+  align-self: flex-start;
+  width:40px;
+  height:40px
+}
+.right img{
+  align-self: flex-start;
+  width:40px;
+  height:40px
 }
 
 .leftSpanTime {
@@ -233,11 +254,11 @@ body {
 
 .right {
   display: flex;
+  flex-direction: column;
   position: relative;
-  align-items: center;
   left: 300px;
   max-width: 250px;
-  padding: 5px;
+  padding: 10px;
   margin: 10px;
   background-image: linear-gradient(to right, #ec008c, #fc6767);
   border-top-left-radius: 10px;
@@ -283,7 +304,7 @@ body {
 
 .recieverAvatar {
   width: 50px;
-  margin: 10px;
+  margin:0px 10px 10px 0px;
 }
 
 

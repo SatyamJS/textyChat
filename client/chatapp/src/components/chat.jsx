@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import io from "socket.io-client"
-
+import ScrollToBottom from "react-scroll-to-bottom"
 
 
 
@@ -32,15 +32,22 @@ function Chat(props, location) {
    
      useEffect(() => {
         socket.on("message", (message) => {
-            console.log(message)
-            setMessages([...messages, message]);
-            let chatHeadImage =document.getElementsByClassName("chatHeader")[0].children[0]
+            // setMessages([...messages, message]);
+            const chatHeadImage =document.getElementsByClassName("chatHeader")[0].children[0]
             chatHeadImage.src=message.userInfo.avatar;
-            let senderName= document.getElementsByClassName("username")[0].value=`${message.userInfo.name}`
+            const msgHead = document.createElement("div")
+            msgHead.className="userMsgHeader"
+            const senderName= document.getElementsByClassName("username")[0].innerHTML=`${message.userInfo.name}`
             const chatDiv = document.getElementsByClassName("chatBody")[0]
             const element = document.createElement("div")
             element.className = "left"
             const username = document.createTextNode(message.userInfo.name)
+            const userNameSpan = document.createElement("span")
+            userNameSpan.className="username"
+            const timeSpan = document.createElement("span")
+            timeSpan.className="timeSpan"
+
+
             const elementImage = document.createElement("img")
             elementImage.className = "recieverAvatar"
             elementImage.src = message.userInfo.avatar
@@ -54,17 +61,23 @@ function Chat(props, location) {
             chatTime = chatTime.split('"')[1]
             chatTime = chatTime.split(":")
             if (chatTime[1].length == 1) {
-                chatTime = chatTime[0] + ":" + "0" + chatTime[1]
+                chatTime = "  "+chatTime[0] + ":" + "0" + chatTime[1]
             }
             else {
-                chatTime = chatTime[0] + ":" + chatTime[1]
+                chatTime ="  " +chatTime[0] + ":" + chatTime[1]
             }
             const timeNode = document.createTextNode(chatTime)
-            timeNode.className = "leftSpanTime"
-            element.appendChild(username)
-            element.appendChild(elementImage)
+            timeSpan.appendChild(timeNode)
+
+            userNameSpan.appendChild(username)
+
+            
+            msgHead.appendChild(elementImage)
+            msgHead.appendChild(userNameSpan)
+            msgHead.appendChild(timeSpan)
+    
+            element.appendChild(msgHead)
             element.appendChild(text)
-            element.appendChild(timeNode)
             chatDiv.appendChild(element)
 
 
@@ -72,14 +85,14 @@ function Chat(props, location) {
 
 
         })
+        scrollToBottom();
     }, [messages])
 
 
 
 
 
-    const scrollToBottom = (event) => {
-        event.preventDefault()
+    const scrollToBottom = () => {
         const chatBody = document.querySelectorAll(".chatBody")
         chatBody[0].scrollTop = chatBody[0].scrollHeight
 
@@ -116,18 +129,24 @@ function Chat(props, location) {
             chatTime = chatTime.split('"')[1]
             chatTime = chatTime.split(":")
             if (chatTime[1].length == 1) {
-                chatTime = chatTime[0] + ":" + "0" + chatTime[1]
+                chatTime = "  "+chatTime[0] + ":" + "0" + chatTime[1]
             }
             else {
-                chatTime = chatTime[0] + ":" + chatTime[1]
+                chatTime = "  "+chatTime[0] + ":" + chatTime[1]
             }
             const timeNode = document.createTextNode(chatTime)
+            const wrapperDiv = document.createElement("div")
+            const timeSpanRight = document.createElement("span")
+            timeSpanRight.className="timeSpan"
+            wrapperDiv.appendChild(text)
+            wrapperDiv.appendChild(timeSpanRight)
+            timeSpanRight.appendChild(timeNode)
             element.appendChild(elementImage)
-            element.appendChild(text)
-            element.appendChild(timeNode)
+            element.append(wrapperDiv)
             chatDiv.appendChild(element)
 
         }
+        scrollToBottom();
         
     }
 
@@ -145,8 +164,15 @@ function Chat(props, location) {
                 <div className="chatHeader">
                     <img src={``} alt="" /> <span className="username"></span> <span className="online"></span> <span style={{ position: "relative", left: "10px", padding: "5px", backgroundColor: "black" }}>Room ID :{props.data.roomId}</span>
                 </div>
+                <div className="chatBody" >
+                    {/* <div className="left">
+                        <div className="userMsgHeader">
 
-                <div className="chatBody" onChange={scrollToBottom}>
+                            <img src="1.png" alt=""  className="recieverAvatar"/>
+                            <span className="username">satyam</span>
+                        </div>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium dolore omnis sint necessitatibus odit molestiae tempora ipsam. Unde, molestiae dicta aperiam ab facere deserunt modi. Cum modi beatae odit magni ad illo?
+                    </div> */}
                    
                 </div>
 

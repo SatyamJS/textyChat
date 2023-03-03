@@ -83,7 +83,7 @@ function Home(props) {
             <div className="inputBox">
                 <input type="text" name="name" placeholder="Username" value={input.name || ""} onChange={handleChange} />
                 <input type="text" name="roomId" placeholder="Room Id" value={input.roomId || ""} onChange={handleChange} />
-                {input.roomId?
+                {(input.roomId && input.name && input.avatar)?
                 <Link to="/chat"> <button className="buttonHome" onClick={(e)=>props.handleSubmit(e,input)}>Enter</button></Link>
                 :
                 <>
