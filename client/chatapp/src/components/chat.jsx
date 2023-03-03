@@ -1,24 +1,26 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import io from "socket.io-client"
-import ScrollToBottom from "react-scroll-to-bottom"
 
 
 
 let socket;
 
 
+
 function Chat(props, location) {
-    const name = props.data.name
-    const roomId = props.data.roomId
-    const avatar = props.data.avatar
+    let data=sessionStorage.getItem("inpData")
+    data=JSON.parse(data)
+    console.log(data)
+
+    const avatar = data.avatar
     const ENDPOINT = "localhost:5000"
     const [message, setMessage] = useState("")
     const [messages, setMessages] = useState([])
 
     useEffect(() => {
         socket = io(ENDPOINT);
-        socket.emit("join", props.data, () => {
+        socket.emit("join", data, () => {
 
         })
 
@@ -162,7 +164,7 @@ function Chat(props, location) {
             <div className="chatDiv">
 
                 <div className="chatHeader">
-                    <img src={``} alt="" /> <span className="username"></span> <span className="online"></span> <span style={{ position: "relative", left: "10px", padding: "5px", backgroundColor: "black" }}>Room ID :{props.data.roomId}</span>
+                    <img src={``} alt="" /> <span className="username"></span> <span className="online"></span> <span style={{ position: "relative", left: "10px", padding: "5px", backgroundColor: "black" }}>Room ID :{data.roomId}</span>
                 </div>
                 <div className="chatBody" >
                     {/* <div className="left">

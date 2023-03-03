@@ -9,7 +9,8 @@ function App() {
   const [data, setData] = useState({})
   const handleSubmit = (event, data) => {
     setData(data)
-    // console.log(data)
+    data=JSON.stringify(data)
+    sessionStorage.setItem("inpData",data)
 
   }
   return (
@@ -17,7 +18,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home handleSubmit={handleSubmit} />}></Route>
-          <Route path="/chat" element={<Chat data={data} />} ></Route>
+          <Route path="/chat" element={<Chat />} ></Route>
 
         </Routes>
       </BrowserRouter>

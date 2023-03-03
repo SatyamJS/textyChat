@@ -27,6 +27,16 @@ function Home(props) {
 
         })
     }
+    const createRoom=()=>{
+        let arr=[1,2,3,4,5,6,7,8,9,0,"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+        let str=""
+        for (let i=0;i<=6;i++){
+           str+= arr[Math.floor(Math.random()*arr.length)]
+        }
+        const p=document.getElementsByClassName("roomP")[0]
+        p.innerHTML=`${str}`
+
+    }
     return (
         <>
             <div className="logoDiv">
@@ -79,6 +89,11 @@ function Home(props) {
 
                     </div>
                 </div>
+            </div>
+            <div className="roomDiv">
+                <button className="roomBtn" onClick={createRoom}>+ Create Room</button>
+                <p>Share this room Id with your friends:</p>
+                <p className="roomP"></p>
             </div>
             <div className="inputBox">
                 <input type="text" name="name" placeholder="Username" value={input.name || ""} onChange={handleChange} />

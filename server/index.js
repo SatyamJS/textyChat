@@ -42,8 +42,8 @@ io.on("connection",(socket)=>{
     })
 
     socket.on("disconnect",()=>{
-        const user =  getUser(socket.id)
-        console.log(`${user}, left the chat`)
+        const user =  removeUser(socket.id)
+        console.log(`${user.name}, left the chat`)
     })
 })
 
