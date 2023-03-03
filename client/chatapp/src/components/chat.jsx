@@ -14,7 +14,7 @@ function Chat(props, location) {
     console.log(data)
 
     const avatar = data.avatar
-    const ENDPOINT = "localhost:5000"
+    const ENDPOINT = "https://texty-chat.onrender.com/"
     const [message, setMessage] = useState("")
     const [messages, setMessages] = useState([])
 
