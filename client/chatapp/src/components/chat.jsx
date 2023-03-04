@@ -11,7 +11,6 @@ let socket;
 function Chat(props, location) {
     let data=sessionStorage.getItem("inpData")
     data=JSON.parse(data)
-    console.log(data)
 
     const avatar = data.avatar
     const ENDPOINT = "https://texty-chat.onrender.com/"
@@ -122,8 +121,8 @@ function Chat(props, location) {
             elementImage.className = "recieverAvatar"
             elementImage.src = avatar
             const text = document.createTextNode(message)
-
-
+            
+            
             // creating time stamp for sender messages------->>>>. 
             let time = new Date()
             let chatTime = `${time.getHours()}:${time.getMinutes()}`
@@ -149,9 +148,10 @@ function Chat(props, location) {
 
         }
         scrollToBottom();
+        setMessage("");
         
     }
-
+    
     return (
         <>
             <div className="logoDiv">
@@ -167,14 +167,7 @@ function Chat(props, location) {
                     <img src={``} alt="" /> <span className="username"></span> <span className="online"></span> <span style={{ position: "relative", left: "10px", padding: "5px", backgroundColor: "black" }}>Room ID :{data.roomId}</span>
                 </div>
                 <div className="chatBody" >
-                    {/* <div className="left">
-                        <div className="userMsgHeader">
-
-                            <img src="1.png" alt=""  className="recieverAvatar"/>
-                            <span className="username">satyam</span>
-                        </div>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium dolore omnis sint necessitatibus odit molestiae tempora ipsam. Unde, molestiae dicta aperiam ab facere deserunt modi. Cum modi beatae odit magni ad illo?
-                    </div> */}
+                   
                    
                 </div>
 
